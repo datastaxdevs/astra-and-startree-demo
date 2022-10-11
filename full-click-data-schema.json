@@ -1,0 +1,32 @@
+{
+  "schemaName": "fullClick",
+  "dimensionFieldSpecs": [
+    {
+      "name": "id",
+      "dataType": "STRING"
+    },
+    {
+      "name": "amount",
+      "dataType": "STRING"
+    },
+    {
+      "name": "email",
+      "dataType": "STRING"
+    },
+    {
+      "name": "full_name",
+      "dataType": "STRING"
+    }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "event_time",
+      "dataType": "LONG",
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    }
+  ],
+  "primaryKeyColumns": [
+    "id"
+  ]
+}
