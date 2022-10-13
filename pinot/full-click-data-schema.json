@@ -3,39 +3,48 @@
   "dimensionFieldSpecs": [
     {
       "name": "url_host",
-      "dataType": "STRING"
+      "dataType": "STRING",
+      "defaultNullValue": ""
     },
     {
       "name": "url_protocol",
-      "dataType": "STRING"
+      "dataType": "STRING",
+      "defaultNullValue": ""
     },
     {
       "name": "url_path",
-      "dataType": "STRING"
+      "dataType": "STRING",
+      "defaultNullValue": ""
     },
     {
       "name": "url_query",
-      "dataType": "STRING"
+      "dataType": "STRING",
+      "defaultNullValue": ""
     },
     {
       "name": "browser_type",
-      "dataType": "STRING"
+      "dataType": "STRING",
+      "defaultNullValue": ""
     },
     {
       "name": "operating_system",
-      "dataType": "STRING"
+      "dataType": "STRING",
+      "defaultNullValue": ""
     },
     {
       "name": "visitor_id",
-      "dataType": "STRING"
+      "dataType": "STRING",
+      "defaultNullValue": ""
     },
     {
       "name": "latitude",
-      "dataType": "DOUBLE"
+      "dataType": "DOUBLE",
+      "defaultNullValue": 0
     },
     {
       "name": "longitude",
-      "dataType": "DOUBLE"
+      "dataType": "DOUBLE",
+      "defaultNullValue": 0
     }
   ],
   "dateTimeFieldSpecs": [

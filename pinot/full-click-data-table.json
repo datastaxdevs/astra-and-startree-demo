@@ -1,20 +1,29 @@
 {
   "isDimTable": "false",
-  "tableName": "fullClickData_REALTIME",
+  "tableName": "fullClickData",
   "tableType": "REALTIME",
-  "tenants": {
-    "broker": "DefaultTenant",
-    "server": "DefaultTenant"
-  },
+  "tenants": {},
   "ingestionConfig": {
     "transformConfigs": [
       {
-        "columnName": "userOid",
-        "transformFunction": "jsonPathString(data, '$.userId')"
+        "columnName": "userAgent",
+        "transformFunction": "jsonPathString(data, '$.user_agent')"
       },
       {
-        "columnName": "userId",
-        "transformFunction": "Groovy({Long.valueOf(userOid.substring(0, 8))}, userOid)"
+        "columnName": "coordinates",
+        "transformFunction": "jsonPathString(data, '$.coords')"
+      },
+      {
+        "columnName": "latitude",
+        "transformFunction": "jsonPathString(coordinates, '$.coordinates.lat')"
+      },
+      {
+        "columnName": "longitude",
+        "transformFunction": "jsonPathString(coordinates, '$.coordinates.long')"
+      },
+      {
+        "columnName": "user_agent",
+        "transformFunction": "Groovy({Long.valueOf(userAgent.substring(0, 8))}, userAgent)"
       }
     ],
     "aggregationConfigs": [
@@ -58,18 +67,12 @@
       "realtime.segment.flush.threshold.time": "1h"
     }
   },
-  "routing": {
-    "instanceSelectorType": "strictReplicaGroup"
-  },
   "metadata": "{}",
   "segmentsConfig": {
+    "timeColumnName": "click_timestamp",
+    "timeType": "MILLISECONDS",
     "schemaName": "fullClick",
-    "retentionTimeUnit": "DAYS",
-    "retentionTimeValue": "3650",
-    "replication": "1",
-    "replicasPerPartition": "1",
-    "timeColumnName": "event_time",
-    "minimizeDataMovement": false
+    "replicasPerPartition": "1"
   },
   "upsertConfig": {
     "mode": "FULL",
