@@ -1,41 +1,11 @@
 {
   "isDimTable": "false",
-  "tableName": "fullClickData",
+  "tableName": "fullClick",
   "tableType": "REALTIME",
-  "tenants": {},
-  "ingestionConfig": {
-    "transformConfigs": [
-      {
-        "columnName": "userAgent",
-        "transformFunction": "jsonPathString(data, '$.user_agent')"
-      },
-      {
-        "columnName": "coordinates",
-        "transformFunction": "jsonPathString(data, '$.coords')"
-      },
-      {
-        "columnName": "latitude",
-        "transformFunction": "jsonPathString(coordinates, '$.coordinates.lat')"
-      },
-      {
-        "columnName": "longitude",
-        "transformFunction": "jsonPathString(coordinates, '$.coordinates.long')"
-      },
-      {
-        "columnName": "user_agent",
-        "transformFunction": "Groovy({Long.valueOf(userAgent.substring(0, 8))}, userAgent)"
-      }
-    ],
-    "aggregationConfigs": [
-      {
-        "columnName": "total_sales",
-        "aggregationFunction": "SUM(price)"
-      },
-      {
-        "columnName": "sales_count",
-        "aggregationFunction": "COUNT(*)"
-      }
-    ]
+  "tenants": {
+    "broker": "DefaultTenant",
+    "server": "DefaultTenant",
+    "tagOverrideConfig": {}
   },
   "tableIndexConfig": {
     "rangeIndexVersion": 2,
@@ -54,20 +24,20 @@
       "streamType": "pulsar",
       "stream.pulsar.bootstrap.servers": "pulsar+ssl://pulsar-gcp-uscentral1.streaming.datastax.com:6651",
       "stream.pulsar.consumer.prop.auto.offset.reset": "smallest",
-      "stream.pulsar.authenticationToken": "xxxxxxx",
+      "stream.pulsar.authenticationToken": "PULSAR_TOKEN",
       "stream.pulsar.consumer.type": "lowlevel",
       "stream.pulsar.enableKeyValueStitch": "true",
-      "stream.pulsar.topic.name": "persistent://XXXXXXXX/astracdc/YYYYYYYY",
+      "stream.pulsar.topic.name": "PULSAR_TOPIC",
       "stream.pulsar.fetch.timeout.millis": "10000",
       "stream.pulsar.decoder.class.name": "ai.startree.pinot.plugin.inputformat.pulsar.PulsarKeyValueAvroMessageDecoder",
       "stream.pulsar.decoder.prop.pulsar.admin.url": "https://pulsar-gcp-uscentral1.api.streaming.datastax.com",
-      "stream.pulsar.decoder.prop.authenticationToken": "xxxxxxx",
+      "stream.pulsar.decoder.prop.authenticationToken": "PULSAR_TOKEN",
       "stream.pulsar.consumer.factory.class.name": "org.apache.pinot.plugin.stream.pulsar.PulsarConsumerFactory",
       "realtime.segment.flush.threshold.size": "10000",
       "realtime.segment.flush.threshold.time": "1h"
     }
   },
-  "metadata": "{}",
+  "metadata": {},
   "segmentsConfig": {
     "timeColumnName": "click_timestamp",
     "timeType": "MILLISECONDS",
@@ -77,5 +47,19 @@
   "upsertConfig": {
     "mode": "FULL",
     "hashFunction": "NONE"
+  },
+  "routing": {
+    "instanceSelectorType": "strictReplicaGroup"
+  },
+  "ingestionConfig": {
+    "transformConfigs": [
+      {
+        "columnName": "url_host",
+        "transformFunction": "LOWER(user_agent)"
+      }
+    ]
+  },
+  "queryConfig" : {
+    "disableGroovy": false
   }
 }

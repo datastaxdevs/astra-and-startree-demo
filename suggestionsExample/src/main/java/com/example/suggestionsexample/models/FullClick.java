@@ -1,41 +1,15 @@
 package com.example.suggestionsexample.models;
 
-public class FullClick {
-    private Integer id;
-    private String uri;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public FullClick() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public static FullClick create(Integer id, String uri) {
-        FullClick fullClick = new FullClick();
-        fullClick.setId(id);
-        fullClick.setUri(uri);
-
-        return fullClick;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryChange{" +
-                "id=" + id +
-                ", uri='" + uri + '\'' +
-                '}';
-    }
+public record FullClick(@JsonProperty("click_timestamp") Long clickTimestamp,
+                        @JsonProperty("url_host") String urlHost,
+                        @JsonProperty("url_protocol") String urlProtocol,
+                        @JsonProperty("url_path") String urlPath,
+                        @JsonProperty("url_query") String urlQuery,
+                        @JsonProperty("browser_type") String browserType,
+                        @JsonProperty("operating_system") String operatingSystem,
+                        @JsonProperty("visitor_id") String visitorId,
+                        long latitude,
+                        long longitude){
 }
