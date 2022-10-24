@@ -3,7 +3,7 @@
   "tableType": "REALTIME",
   "segmentsConfig": {
     "timeType": "MILLISECONDS",
-    "schemaName": "fullClick2",
+    "schemaName": "fullClick",
     "replicasPerPartition": "1",
     "minimizeDataMovement": false,
     "timeColumnName": "click_timestamp"
