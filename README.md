@@ -97,7 +97,7 @@ curl -S --fail -X POST ${WEB_SERVICE_URL}/admin/v3/astra/tenants/${TENANT}/cdc \
 }'
 
 # Add a row of data to create the topic schema
-astra db cqlsh ${DB_NAME} --execute "INSERT INTO ${KEYSPACE_NAME}.${TABLE_NAME}(click_epoch, UTC_offset, request_url, user_agent, visitor_id, coords) values(1665769440000, -4, 'https://request.com/something/', 'a b c d','1234asd','{}');"
+astra db cqlsh ${DB_NAME} --execute "INSERT INTO ${KEYSPACE_NAME}.${TABLE_NAME}(click_epoch, UTC_offset, request_url, user_agent, visitor_id, coords) values(1665769440000, -4, 'https://request.com/something/page.html', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41','1234asd','{\"coords\":{\"latitude\":37.40730296266554,\"heading\":null,\"accuracy\":40,\"altitudeAccuracy\":null,\"altitude\":null,\"longitude\":-122.08019055687454,\"speed\":null},\"timestamp\":1339712284200}');"
 
 # Retrieve the auto-created topic
 PULSAR_TOPIC=$(astra streaming pulsar-shell --execute-command "admin topics list ${TENANT}/astracdc" ${TENANT} | grep data-.*-0 | awk '{gsub("-partition-0","");print}')
