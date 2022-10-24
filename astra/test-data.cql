@@ -1,8 +1,8 @@
 INSERT INTO page_view_data.raw_clicks(click_epoch, UTC_offset, request_url, user_agent, visitor_id, coords)
-values(1666534120000, -4, 'https://request.com/something/', 'a b c d','123','{}');
+values(1666534120000, -4, 'https://some.domain.com/a-folder/another-folder/file.html?q=1&q=2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59','123','{"coords":{"latitude":38.17546082408712,"heading":null,"accuracy":1753.3297567845666,"altitudeAccuracy":null,"altitude":null,"longitude":-85.73650984798745,"speed":null},"timestamp":1339712284200}');
 
 INSERT INTO page_view_data.raw_clicks(click_epoch, UTC_offset, request_url, user_agent, visitor_id, coords)
-values(1666620520000, 0, 'https://request.com/something/', 'a b c d','456','{}');
+values(1666620520000, 0, 'http://some.domain.com/a-folder/another-folder', 'Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion','456','{"coords":{"latitude":37.39606294496861,"heading":null,"accuracy":40,"altitudeAccuracy":null,"altitude":null,"longitude":-121.97591579953844,"speed":null},"timestamp":1339712284200}');
 
 INSERT INTO page_view_data.raw_clicks(click_epoch, UTC_offset, request_url, user_agent, visitor_id, coords)
-values(1666447720000, 1, 'https://request.com/something/', 'a b c d','789','{}');
+values(1666447720000, 1, 'https://some.domain.com/a-folder/another-folder/file.html', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41','789','{"coords":{"latitude":37.40730296266554,"heading":null,"accuracy":40,"altitudeAccuracy":null,"altitude":null,"longitude":-122.08019055687454,"speed":null},"timestamp":1339712284200}');
