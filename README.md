@@ -26,7 +26,7 @@ Follow [this guide](https://dev.startree.ai/docs/startree-enterprise-edition/sta
 PINOT_TOKEN="<TOKEN_HERE>"
 ```
 
-## Optionally change the cloud, region, or object naming
+## Set the cloud, region, or object naming
 
 > Make sure the cloud providers and cloud regions match between DB and Steaming. It is a requirement of Astra CDC.
 
@@ -52,11 +52,13 @@ astra db create \
   --wait \
   ${DB_NAME}
 
-# Confirm the status is "ACTIVE"
-astra db get ${DB_NAME}
-
-# Make sure the database is active before continuing
 DB_ID=$(astra db get ${DB_NAME} --key id)
+```
+
+Do not continue until the DB has a status of "ACTIVE"
+
+```bash
+astra db get ${DB_NAME}
 ```
 
 ## Create the raw clicks table
@@ -126,3 +128,14 @@ curl -S --fail -X POST "https://pinot.demo1.chinmayorg.startree.cloud/tables" \
 ## See the new data loaded in Pinot
 
 ![](./assets/pinot-query.png)
+
+
+## Adding additional data
+
+Assuming you did not change the values of KEYSPACE_NAME and TABLE_NAME, you can see the whole example in action by running the following command.
+
+```bash
+astra db cqlsh ${DB_NAME} --file ./astra/test-data.cql
+```
+
+> Remember - upserts are enabled on the Pinot table using the `visitor_id` column. So when you select rows it only show the latest value for each distinct id. To see all the rows in the table use: `select * from fullClick limit 10 option(skipUpsert=true)`.
