@@ -6,7 +6,7 @@
       "dataType": "STRING"
     },
     {
-      "name": "url_protocol",
+      "name": "url_scheme",
       "dataType": "STRING"
     },
     {
