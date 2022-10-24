@@ -57,8 +57,36 @@
   "ingestionConfig": {
     "transformConfigs": [
       {
+        "columnName": "operating_system",
+        "transformFunction": "Groovy({(user_agent =~ /\\((?<info>.*?)\\)(\\s|$)|(?<name>.*?)\\/(?<version>.*?)(\\s|$)/)[1][0]}, user_agent)"
+      },
+      {
+        "columnName": "browser_type",
+        "transformFunction": "Groovy({(user_agent =~ /\\((?<info>.*?)\\)(\\s|$)|(?<name>.*?)\\/(?<version>.*?)(\\s|$)/)[4][0]}, user_agent)"
+      },
+      {
         "columnName": "url_host",
-        "transformFunction": "Groovy({user_agent}, user_agent)"
+        "transformFunction": "Groovy({new URI(request_url).host}, request_url)"
+      },
+      {
+        "columnName": "url_scheme",
+        "transformFunction": "Groovy({new URI(request_url).scheme}, request_url)"
+      },
+      {
+        "columnName": "url_path",
+        "transformFunction": "Groovy({new URI(request_url).path}, request_url)"
+      },
+      {
+        "columnName": "url_query",
+        "transformFunction": "Groovy({new URI(request_url).query}, request_url)"
+      },
+      {
+        "columnName": "latitude",
+        "transformFunction": "jsonPathString(coords, '$.coords.latitude')"
+      },
+      {
+        "columnName": "longitude",
+        "transformFunction": "jsonPathString(coords, '$.coords.longitude')"
       }
     ]
   },
